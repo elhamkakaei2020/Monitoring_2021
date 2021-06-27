@@ -160,7 +160,7 @@ plot(difb, col=cldif , main= "2011 - 2015" )
 difc <- swia2015 - swia2020 
 plot(difb, col=cldif , main= "2015 - 2020" )
 #to make crop for north Europ and ASia
-ext <- c(-50,100 ,40,100)  
+ext <- c(-50,100 ,40,100)  # xmin xmax ymin ymax
 difa_north <- crop(difa, ext)
 plot(difa_north, col=cldif , main= "north 2007 - 2011")
  
