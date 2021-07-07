@@ -1,5 +1,5 @@
 # Elham Kakaei
-# Degree Course : Scinces and Management Nature
+# Degree Course : Scinces and Management of Nature
 install.packages("ncdf4")
 install.packages("raster")
 library(ncdf4)
@@ -118,8 +118,8 @@ SWIA <- stack(swia2007  , swia2008 , swia2009 , swia2010 ,swia2011 , swia2012 , 
 plot(SWIA, col=cl)
 # change color
 clb <- colorRampPalette(c('red','blue','yellow'))(100)
-SWIA <- stack(swia2007  , swia2008 , swia2009 , swia2010 ,swia2011 , swia2012 , swia2013 ,swia2014 , swia2015 ,swia2016 , swia2017 , swia2018 , swia2019 , swia2020 )
 plot(SWIA, col=clb)
+
 #To make plot RGB
 plotRGB(SWIA , red=swia2007 , green=swia2014 , blue=swia2020 , stretch="lin")
 #For getting Boxplot
@@ -201,7 +201,7 @@ swiaplist
 SWIAP <- stack(swia2007 , swia2011 , swia2015 , swia2019 )
 plot(SWIAP, col=cl)
 # now need extent by brick function I saw the extent was (-180, 180, -90, 90)
-# crop the stack to the extent of Sicily
+# crop the stack to the extent 
 ext<-c(-180, 180, -90, 90)
 extension<-crop(SWIAP,ext)
 #Create the time variable to be used in regression
