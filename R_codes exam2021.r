@@ -4,6 +4,7 @@ install.packages("ncdf4")
 install.packages("raster")
 library(ncdf4)
 library(raster)
+library(rgdal)# for making prediction 
 # setwd("C:/lab/project")
 # windows
 setwd("C:/lab/project")
@@ -24,6 +25,7 @@ swia2019 <- raster("c_gls_SWI10_201904011200_GLOBE_ASCAT_V3.1.1.nc")
 swia2020 <- raster("c_gls_SWI10_202004111200_GLOBE_ASCAT_V3.1.1.nc")
 
 # to get plot of images 
+#In order to put the title above the plots Make use of the function: main=
 #To get information of image and its layers use function of brick 
 swia2007 < - brick ( "c_gls_SWI10_200704111200_GLOBE_ASCAT_V3.1.1.nc " )
 swia2007
@@ -179,6 +181,39 @@ plot(difb_america, col=cldif , main= "america 2011 - 2015")
  
 difc_america <- crop(difc, exta)
 plot(difc_america, col=cldif , main= "america 2015 - 2020")
+
+#I dicided to make prediction from my images SO Based on my research, I realized that the distance between the images is important, and as a result, I created a new folder in Lab and left four of the images four years apart.
+#I try to make a prediction in raster using linear regression based on past rasters 
+# calculate regression in a raster stack (time series)
+# and predict.
+# setwd("C:/lab/project/predict")
+setwd("C:/lab/project/predict")
+#to put images in raster
+swia2007 <- raster("c_gls_SWI10_200704111200_GLOBE_ASCAT_V3.1.1.nc")
+swia2011 <- raster("c_gls_SWI10_201104111200_GLOBE_ASCAT_V3.1.1.nc")
+swia2015 <- raster("c_gls_SWI10_201504111200_GLOBE_ASCAT_V3.1.1.nc")
+swia2019 <- raster("c_gls_SWI10_201904011200_GLOBE_ASCAT_V3.1.1.nc")
+# for predicting firstly to make list 
+swiaplist <- list.files(pattern="c_gls_SWI10")
+swiaplist 
+# Now to make stack 
+# SWIA <- stack(list_raster )
+SWIAP <- stack(swia2007 , swia2011 , swia2015 , swia2019 )
+plot(SWIAP, col=cl)
+# now need extent by brick function I saw the extent was (-180, 180, -90, 90)
+# crop the stack to the extent of Sicily
+ext<-c(-180, 180, -90, 90)
+extension<-crop(SWIAP,ext)
+#Create the time variable to be used in regression
+time<-1:nlayers(SWIAP)
+time
+# run the regression
+fun<-function(x) {if(is.na(x[1])){ NA } else {lm(x ~ time)$coefficients[2]}}
+prediction.2023<-calc(extension, fun)
+plot(prediction.2023, col=cl , main=2023)
+# to change color 
+plot(prediction.2023, col=clb , main=2023)
+
 
 
 
