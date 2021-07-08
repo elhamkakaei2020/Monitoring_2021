@@ -199,6 +199,8 @@ swiaplist
 SWIAP <- stack(swiaplist )
 plot(SWIAP )
 # now need extent by brick function I saw the extent was (-180, 180, -90, 90)
+#SWIAP see extention
+SWIAP
 # crop the stack to the extent 
 ext<-c(-180, 180, -90, 90)
 extension<-crop(SWIAP,ext)
