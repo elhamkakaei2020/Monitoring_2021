@@ -122,9 +122,6 @@ plot(SWIA, col=clb)
 
 #To make plot RGB
 plotRGB(SWIA , red=swia2007 , green=swia2014 , blue=swia2020 , stretch="lin")
-#For getting Boxplot
-dev.off()
-boxplot(SWIA ,horizontal=T,axes=T,outline=F, col="red",xlab="soil water ", ylab="Period")
 
 #To find different part from 2007 to 2020
 # put cldif <- colorRampPalette(c('blue','yellow','red'))(100)  as a color of plots 
@@ -160,7 +157,7 @@ plot(difa, col=cldif , main= "2007 - 2011" )
 difb <- swia2011 - swia2015 
 plot(difb, col=cldif , main= "2011 - 2015" )
 difc <- swia2015 - swia2020 
-plot(difb, col=cldif , main= "2015 - 2020" )
+plot(difc, col=cldif , main= "2015 - 2020" )
 #to make crop for north Europ and ASia
 ext <- c(-50,100 ,40,100)  # xmin xmax ymin ymax
 difa_north <- crop(difa, ext)
@@ -189,17 +186,18 @@ plot(difc_america, col=cldif , main= "america 2015 - 2020")
 # setwd("C:/lab/project/predict")
 setwd("C:/lab/project/predict")
 #to put images in raster
-swia2007 <- raster("c_gls_SWI10_200704111200_GLOBE_ASCAT_V3.1.1.nc")
-swia2011 <- raster("c_gls_SWI10_201104111200_GLOBE_ASCAT_V3.1.1.nc")
-swia2015 <- raster("c_gls_SWI10_201504111200_GLOBE_ASCAT_V3.1.1.nc")
-swia2019 <- raster("c_gls_SWI10_201904011200_GLOBE_ASCAT_V3.1.1.nc")
+swia2007 <- raster("c_gls_SW_200704111200_GLOBE_ASCAT_V3.1.1.nc")
+swia2011 <- raster("c_gls_SW_201104111200_GLOBE_ASCAT_V3.1.1.nc")
+swia2015 <- raster("c_gls_SW_201504111200_GLOBE_ASCAT_V3.1.1.nc")
+swia2019 <- raster("c_gls_SW_201904011200_GLOBE_ASCAT_V3.1.1.nc")
+
 # for predicting firstly to make list 
-swiaplist <- list.files(pattern="c_gls_SWI10")
+swiaplist <- list.files(pattern="c_gls_SW")
 swiaplist 
 # Now to make stack 
 # SWIA <- stack(list_raster )
-SWIAP <- stack(swia2007 , swia2011 , swia2015 , swia2019 )
-plot(SWIAP, col=cl)
+SWIAP <- stack(swiaplist )
+plot(SWIAP )
 # now need extent by brick function I saw the extent was (-180, 180, -90, 90)
 # crop the stack to the extent 
 ext<-c(-180, 180, -90, 90)
