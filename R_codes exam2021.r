@@ -214,26 +214,7 @@ plot(prediction.2023, col=cl , main=2023)
 # to change color 
 plot(prediction.2023, col=clb , main=2023)
 
-# to try another method for making prediction
-# After the code of time
-lm_intercept <- calc(extension, fun = function(x) {
-  if (all(is.na(x)))
-    return(NA)
-  else
-    return(coef(lm(x ~ time))[1])
-})
 
-lm_slope <- calc(extension, fun = function(x) {
-  if (all(is.na(x)))
-    return(NA)
-  else
-    return(coef(lm(x ~ time))[2])
-})
-
-## predict ndvi (y = m*x + t)
-predicted = lm_slope * (extension[[4]]) + lm_intercept
-
-plot(predicted)
 
 
 
