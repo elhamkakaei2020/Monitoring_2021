@@ -153,7 +153,7 @@ swia2019 <- raster("c_gls_SW_201904011200_GLOBE_ASCAT_V3.1.1.nc")
 swiaplist <- list.files(pattern="c_gls_SW")
 swiaplist 
 # Now to make stack 
-# SWIA <- stack(list_raster )
+# SWIA <- stack(list.files )
 SWIAP <- stack(swiaplist )
 plot(SWIAP, col=cl) 
 # now need extent by brick function I saw the extent was (-180, 180, -90, 90)
