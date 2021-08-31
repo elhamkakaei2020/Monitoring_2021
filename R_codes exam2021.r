@@ -172,6 +172,17 @@ plot(prediction.2023, col=cl , main=2023)
 # to change color 
 plot(prediction.2023, col=clb , main=2023)
 
+lm_intercept <- calc(extension, fun = function(x) {  if (all(is.na(x))) return(NA)  else return(coef(lm(x ~ time))[1])})
+
+   
+lm_slope <- calc(extension, fun = function(x) {  if (all(is.na(x)))    return(NA) else return(coef(lm(x ~ time))[2])})
+  
+predicted = lm_slope * (extension[[4]]) + lm_intercept
+predicted[predicted==0] <- NA
+plot(predicted)
+
+
+
 
 
 
