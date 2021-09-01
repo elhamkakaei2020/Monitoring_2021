@@ -166,16 +166,10 @@ extension<-crop(SWIAP,ext)
 time<-1:nlayers(SWIAP)
 time
 # run the regression
-fun<-function(x) {if(is.na(x[1])){ NA } else {lm(x ~ time)$coefficients[2]}}
-prediction.2023<-calc(extension, fun)
-plot(prediction.2023, col=cl , main=2023)
-# to change color 
-plot(prediction.2023, col=clb , main=2023)
-
-lm_intercept <- calc(extension, fun = function(x) {  if (all(is.na(x))) return(NA)  else return(coef(lm(x ~ time))[1])})
-
-   
-lm_slope <- calc(extension, fun = function(x) {  if (all(is.na(x)))    return(NA) else return(coef(lm(x ~ time))[2])})
+# y=ax+b
+lm_intercept <- calc(extension, fun = function(x) {if (all(is.na(x))) return(NA)  else return(coef(lm(x ~ time))[1])})
+ 
+lm_slope <- calc(extension, fun = function(x) {if (all(is.na(x))) return(NA) else return(coef(lm(x ~ time))[2])})
   
 predicted = lm_slope * (extension[[4]]) + lm_intercept
 predicted[predicted==0] <- NA
