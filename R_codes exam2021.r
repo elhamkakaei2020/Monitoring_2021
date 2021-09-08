@@ -94,16 +94,6 @@ plot(swia2018 , col=cl , main=2018 )
 plot(swia2019 , col=cl , main=2019 )
 plot(swia2020 , col=cl , main=2020 )
 
-#to make stack from all images in the list 
-# SWIA <- stack(list.files )
-SWIA <- stack(swialist )
-plot(SWIA, col=cl)
-# change color
-clb <- colorRampPalette(c('red','blue','yellow'))(100)
-plot(SWIA, col=clb)
-
-#To make plot RGB
-plotRGB(SWIA , red=swia2007 , green=swia2014 , blue=swia2020 , stretch="lin")
 
 #To find different part from 2007 to 2020
 # put cldif <- colorRampPalette(c('blue','yellow','red'))(100)  as a color of plots 
@@ -165,7 +155,7 @@ extension<-crop(SWIAP,ext)
 #Create the time variable to be used in regression
 time<-1:nlayers(SWIAP)
 time
-# run the regression
+# the regression
 # y=ax+b
 lm_intercept <- calc(extension, fun = function(x) {if (all(is.na(x))) return(NA)  else return(coef(lm(x ~ time))[1])})
  
